@@ -48,5 +48,19 @@ public class PalindromeCheckerApp {
                 break;
             }
         System.out.println("Input : " + name + "\nIs Palindrome? : " + isPalindromeUC5);
+
+        java.util.Queue<Character> queue = new java.util.LinkedList<>();
+        java.util.Stack<Character> stack6 = new java.util.Stack<>();
+        for (char c : chars) {
+            queue.add(c);
+            stack6.push(c);
+        }
+        boolean isPalindromeUC6 = true;
+        while (!queue.isEmpty())
+            if (queue.poll() != stack6.pop()) {
+                isPalindromeUC6 = false;
+                break;
+            }
+        System.out.println("Input : " + name + "\nIs Palindrome? : " + isPalindromeUC6);
     }
 }
