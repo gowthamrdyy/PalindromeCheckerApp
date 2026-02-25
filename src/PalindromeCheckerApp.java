@@ -62,5 +62,16 @@ public class PalindromeCheckerApp {
                 break;
             }
         System.out.println("Input : " + name + "\nIs Palindrome? : " + isPalindromeUC6);
+
+        java.util.Deque<Character> deque = new java.util.ArrayDeque<>();
+        for (char c : chars)
+            deque.add(c);
+        boolean isPalindromeUC7 = true;
+        while (deque.size() > 1)
+            if (deque.removeFirst() != deque.removeLast()) {
+                isPalindromeUC7 = false;
+                break;
+            }
+        System.out.println("Input : " + name + "\nIs Palindrome? : " + isPalindromeUC7);
     }
 }
