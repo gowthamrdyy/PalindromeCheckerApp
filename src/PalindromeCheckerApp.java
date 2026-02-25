@@ -12,6 +12,7 @@ public static void main(String[] args) {
     for(int i=0;i<n/2;i++) {
         if (name.charAt(i) != name.charAt(n - i-1)) {
             b = false;
+            break;
         } else {
             b = true;
         }
@@ -21,11 +22,26 @@ public static void main(String[] args) {
     for(int i=n-1;i>=0;i--){
         Reverse=Reverse+name.charAt(i);
     }
-    if(name==Reverse){
+    if(name.equals(Reverse)){
         System.out.println("It is Palindrome");
         }
     else{
         System.out.println("It's not a palindrome");
         }
+    char[] chars = name.toCharArray();
+    int start = 0;
+    int end = chars.length - 1;
+    boolean isPalindromeUC4 = true;
+
+    while (start < end) {
+        if (chars[start] != chars[end]) {
+            isPalindromeUC4 = false;
+            break;
+        }
+        start++;
+        end--;
+    }
+    System.out.println("Input : " + name);
+    System.out.println("Is Palindrome? : " + isPalindromeUC4);
     }
 }
