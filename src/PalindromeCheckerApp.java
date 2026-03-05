@@ -73,5 +73,7 @@ public class PalindromeCheckerApp {
                 break;
             }
         System.out.println("Input : " + name + "\nIs Palindrome? : " + isPalindromeUC7);
+
+
     }
 }
