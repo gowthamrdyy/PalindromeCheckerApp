@@ -73,7 +73,46 @@ public class PalindromeCheckerApp {
                 break;
             }
         System.out.println("Input : " + name + "\nIs Palindrome? : " + isPalindromeUC7);
-
-
+        class Node {
+            char data;
+            Node next;
+            Node(char data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+        Node head = null, tail = null;
+        for (char c : chars) {
+            Node newNode = new Node(c);
+            if (head == null) {
+                head = tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        Node prev = null, current = slow, next;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        Node first = head, second = prev;
+        boolean isPalindromeUC8 = true;
+        while (second != null) {
+            if (first.data != second.data) {
+                isPalindromeUC8 = false;
+                break;
+            }
+            first = first.next;
+            second = second.next;
+        }
+        System.out.println("Input : " + name + "\nIs Palindrome? : " + isPalindromeUC8);
     }
 }
