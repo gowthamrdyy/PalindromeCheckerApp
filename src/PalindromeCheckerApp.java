@@ -1,47 +1,33 @@
-import java.util.*;
-public class PalindromeCheckerApp{
-public static void main(String[] args) {
-    System.out.println("Welcome to Palindrome Checker app");
-    System.out.println("Version 1.0");
-    System.out.println("System Initalzed Successfully");
-    Scanner a=new Scanner(System.in);
-    System.out.print("Enter a Name:");
-    String name=a.nextLine();
-    int n=name.length();
-    boolean b = true;
-    for(int i=0;i<n/2;i++) {
-        if (name.charAt(i) != name.charAt(n - i-1)) {
-            b = false;
-            break;
-        } else {
-            b = true;
-        }
-    }
-    System.out.println(b);
-    String Reverse="";
-    for(int i=n-1;i>=0;i--){
-        Reverse=Reverse+name.charAt(i);
-    }
-    if(name.equals(Reverse)){
-        System.out.println("It is Palindrome");
-        }
-    else{
-        System.out.println("It's not a palindrome");
-        }
-    char[] chars = name.toCharArray();
-    int start = 0;
-    int end = chars.length - 1;
-    boolean isPalindromeUC4 = true;
+import java.util.Scanner;
 
-    while (start < end) {
-        if (chars[start] != chars[end]) {
-            isPalindromeUC4 = false;
-            break;
+public class palindromecheckerapp {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter text: ");
+        String input = scanner.nextLine();
+
+        char[] chars = input.toCharArray();
+
+        int start = 0;
+        int end = chars.length - 1;
+
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
-        start++;
-        end--;
-    }
-    System.out.println("Input : " + name);
-    System.out.println("Is Palindrome? : " + isPalindromeUC4);
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+
+        scanner.close();
     }
 }
