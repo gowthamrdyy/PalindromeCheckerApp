@@ -1,78 +1,51 @@
-import java.util.Scanner;
-
 public class PalindromeCheckerApp {
 
-    static class Node {
-        char data;
-        Node next;
-        Node(char data) {
-            this.data = data;
-            this.next = null;
-        }
+    public static void main(String[] args) {
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        String name = scanner.nextLine();
+        
+        long start1 = System.nanoTime();
+        boolean res1 = checkTwoPointer(name);
+        long end1 = System.nanoTime();
+        
+        long start2 = System.nanoTime();
+        boolean res2 = checkReverse(name);
+        long end2 = System.nanoTime();
+        
+        long start3 = System.nanoTime();
+        boolean res3 = checkRecursive(name, 0, name.length() - 1);
+        long end3 = System.nanoTime();
+
+        System.out.println("Two Pointer: " + res1 + " Time: " + (end1 - start1) + " ns");
+        System.out.println("Reverse String: " + res2 + " Time: " + (end2 - start2) + " ns");
+        System.out.println("Recursive: " + res3 + " Time: " + (end3 - start3) + " ns");
+        
+        scanner.close();
     }
 
-    public static Node createLinkedList(String str) {
-        Node head = null, tail = null;
-        for (char ch : str.toCharArray()) {
-            Node newNode = new Node(ch);
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
-        return head;
-    }
-
-    public static Node reverse(Node head) {
-        Node prev = null;
-        while (head != null) {
-            Node next = head.next;
-            head.next = prev;
-            prev = head;
-            head = next;
-        }
-        return prev;
-    }
-
-    public static boolean isPalindrome(Node head) {
-        if (head == null || head.next == null)
-            return true;
-
-        Node slow = head;
-        Node fast = head;
-
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        Node secondHalf = reverse(slow);
-        Node firstHalf = head;
-
-        while (secondHalf != null) {
-            if (firstHalf.data != secondHalf.data)
+    private static boolean checkTwoPointer(String str) {
+        if (str == null) return false;
+        int left = 0, right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
                 return false;
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
+            }
+            left++;
+            right--;
         }
-
         return true;
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Palindrome Checker App");
-        System.out.println("UC8: Linked List Based Palindrome Checker");
-        System.out.print("Enter a string: ");
-        String input = scanner.nextLine();
-        Node head = createLinkedList(input);
-        if (isPalindrome(head))
-            System.out.println("The given string is a palindrome.");
-        else
-            System.out.println("The given string is not a palindrome.");
-        scanner.close();
+    private static boolean checkReverse(String str) {
+        if (str == null) return false;
+        String reversed = new StringBuilder(str).reverse().toString();
+        return str.equals(reversed);
+    }
+
+    private static boolean checkRecursive(String str, int left, int right) {
+        if (str == null) return false;
+        if (left >= right) return true;
+        if (str.charAt(left) != str.charAt(right)) return false;
+        return checkRecursive(str, left + 1, right - 1);
     }
 }
